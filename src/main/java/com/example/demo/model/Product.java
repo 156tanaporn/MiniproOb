@@ -1,7 +1,13 @@
 package com.example.demo.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -13,6 +19,21 @@ public class Product {
 	private Integer productId;
 	private String nameProduct;
 	private String detailProduct;
+	private String review;
+	
+	
+	public String getReview() {
+		return review;
+	}
+
+
+	public void setReview(String review) {
+		this.review = review;
+	}
+
+
+	/*@OneToMany(mappedBy = "product")
+	private List<Review> reviews;*/
 	
 	
 	public Product() {
@@ -27,6 +48,18 @@ public class Product {
 		this.nameProduct = nameProduct;
 		this.detailProduct = detailProduct;
 	}
+
+
+	/*public Product(List<Review> reviews) {
+		super();
+		this.reviews = reviews;
+	}
+	public List<Review> getReviews() {
+		return reviews;
+	}
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}*/
 
 
 	public Integer getProductId() {

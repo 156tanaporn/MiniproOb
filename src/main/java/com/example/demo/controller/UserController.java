@@ -83,9 +83,8 @@ public class UserController {
 			
 			if(user.isPresent()) {
 				User userEdit = user.get();
-				userEdit.setName(body.getName());
-				userEdit.setAddress(body.getAddress());
-				userEdit.setPhone(body.getPhone());
+				userEdit.setFullname(body.getFullname());
+				userEdit.setPassword(body.getPassword());
 				userEdit.setEmail(body.getEmail());
 				userEdit.setUserId(body.getUserId());
 				
