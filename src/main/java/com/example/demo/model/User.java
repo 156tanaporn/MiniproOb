@@ -18,7 +18,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	private Integer userId;
+	private String username;
 	private String password;
 	private String fullname;
 	private String email;
@@ -28,10 +28,10 @@ public class User {
 	private List<Review> reviews;
 	
 	
-	public User(Integer id, Integer userId, String password, String fullname, String email) {
+	public User(Integer id, String username, String password, String fullname, String email) {
 		super();
 		this.id = id;
-		this.userId = userId;
+		this.username = username;
 		this.password = password;
 		this.fullname = fullname;
 		this.email = email;
@@ -64,11 +64,11 @@ public class User {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getUserId() {
-		return userId;
+	public String getUsername() {
+		return username;
 	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getPassword() {
 		return password;
