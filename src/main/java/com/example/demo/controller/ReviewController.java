@@ -49,7 +49,7 @@ public class ReviewController {
 			if(review.isPresent()) {
 				return new ResponseEntity<>(review, HttpStatus.OK);
 			}else {
-				return new ResponseEntity<>("Product Not Found", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>("Review Not Found", HttpStatus.BAD_REQUEST);
 			}
 			
 		} catch (Exception e) {
@@ -75,7 +75,7 @@ public class ReviewController {
 				return new ResponseEntity<>("EDIT SUCCESS", HttpStatus.OK);
 			}else {
 				
-				return new ResponseEntity<>("User Not Found", HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>("Review Not Found", HttpStatus.BAD_REQUEST);
 			}
 		} catch (Exception e) {
 			

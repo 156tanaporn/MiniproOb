@@ -23,8 +23,8 @@ public class Review {
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "product_id")
-	private Product product;
+	@JoinColumn(name = "series_id")
+	private Series series;
 	
 	
 	public Review() {
@@ -36,10 +36,10 @@ public class Review {
 		this.reviewId = reviewId;
 		this.comment = comment;
 	}
-	public Review(User user, Product product) {
+	public Review(User user, Series series) {
 		super();
 		this.user = user;
-		this.product = product;
+		this.series = series;
 	}
 
 	
@@ -51,11 +51,11 @@ public class Review {
 		this.user = user;
 	}
 
-	public Product getProduct() {
-		return product;
+	public Series getSeries() {
+		return series;
 	}
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setSeries(Series series) {
+		this.series = series;
 	}
 
 	public Integer getId() {

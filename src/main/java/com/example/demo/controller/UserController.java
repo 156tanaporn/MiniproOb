@@ -86,7 +86,7 @@ public class UserController {
 				userEdit.setFullname(body.getFullname());
 				userEdit.setPassword(body.getPassword());
 				userEdit.setEmail(body.getEmail());
-				userEdit.setUserId(body.getUserId());
+				
 				
 				userRepository.save(userEdit);
 				
