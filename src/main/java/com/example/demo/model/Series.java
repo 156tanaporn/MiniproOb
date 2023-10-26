@@ -18,15 +18,15 @@ public class Series {
 	private Integer seriesId;
 	private String seriesName;
 	private String detailSeries;
-	private String review;
 	
 	
-	public Series(Integer seriesId, String seriesName, String detailSeries, String review) {
+	
+	public Series(Integer seriesId, String seriesName, String detailSeries) {
 		super();
 		this.seriesId = seriesId;
 		this.seriesName = seriesName;
 		this.detailSeries = detailSeries;
-		this.review = review;
+		
 	}
 
 
@@ -65,14 +65,6 @@ public class Series {
 	}
 
 
-	public String getReview() {
-		return review;
-	}
-
-
-	public void setReview(String review) {
-		this.review = review;
-	}
 	
 	
 	

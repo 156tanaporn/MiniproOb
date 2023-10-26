@@ -9,25 +9,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Review;
+import com.example.demo.model.Series;
 import com.example.demo.repositrory.ReviewRepository;
+import com.example.demo.repositrory.SeriesRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RestController
 public class ReviewController {
 
 
-    @Autowired
-    ReviewRepository reviewRepository;
-    
-    public ReviewController(ReviewRepository reviewRepository) {
-        this.reviewRepository = reviewRepository;
-    }
+	@Autowired
+	ReviewRepository reviewRepository;
 
-    @GetMapping("/review")
+		
+	@GetMapping("/review")
 	public ResponseEntity<Object> getReview() {
 		
 		try {
@@ -39,9 +40,24 @@ public class ReviewController {
 			return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-    
-    @GetMapping("/review/{reviewId}")
-	public ResponseEntity<Object> getProductDetail(@PathVariable Integer reviewId ) {
+	
+	@PostMapping("/review")
+	public ResponseEntity<Object> addReview(@RequestBody Review body) {
+		
+		try {
+			Review review = reviewRepository.save(body);
+			
+			return new ResponseEntity<>(review, HttpStatus.CREATED);
+		} catch (Exception e) {
+			
+			return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+	}
+	
+	@GetMapping("/review/{reviewId}")
+	public ResponseEntity<Object> getReviewDetail(@PathVariable Integer reviewId ) {
 		
 		try {
 			
@@ -58,9 +74,10 @@ public class ReviewController {
 		}
 		
 	}
-    
-    @PutMapping("/review/{reviewId}")
-	public ResponseEntity<Object> updateProduct(@PathVariable Integer reviewId,@RequestBody Review body) {
+	
+	
+	@PutMapping("/review/{reviewId}")
+	public ResponseEntity<Object> updateReview(@PathVariable Integer reviewId,@RequestBody Review body) {
 		
 		try {
 			Optional<Review> review = reviewRepository.findById(reviewId);
@@ -69,7 +86,6 @@ public class ReviewController {
 				Review reviewEdit = review.get();
 				reviewEdit.setComment(body.getComment());
 				
-			
 				reviewRepository.save(reviewEdit);
 				
 				return new ResponseEntity<>("EDIT SUCCESS", HttpStatus.OK);
@@ -82,22 +98,26 @@ public class ReviewController {
 			return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-    @PostMapping("/review")
-    public Review createReview(Review review) {
-        return reviewRepository.save(review);
-    }
-
-    public Review updateReview(Integer reviewId, Review review) {
-        if (reviewRepository.existsById(reviewId)) {
-            review.setId(reviewId);
-            return reviewRepository.save(review);
-        }
-        return null;
-    }
-
-    @DeleteMapping("/review/{reviewId}")
-    public void deleteReview(Integer reviewId) {
-        reviewRepository.deleteById(reviewId);
-    }
+	
+	
+	@DeleteMapping("/review/{reviewId}")
+	public ResponseEntity<Object> deleteReview (@PathVariable Integer reviewId) {
+		
+		try {
+			Optional<Review> review = reviewRepository.findById(reviewId);
+			if(review.isPresent()) {
+				
+				reviewRepository.delete(review.get());
+				
+				return new ResponseEntity<>("DELETE SUCCESS", HttpStatus.OK);
+			}else {
+				return new ResponseEntity<>("Review Not Found", HttpStatus.BAD_REQUEST);
+			}
+			
+		} catch (Exception e) {
+			return new ResponseEntity<>("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
 }
+
